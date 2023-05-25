@@ -1,0 +1,242 @@
+// Java program to create and level order traverse a generic or general tree  
+   
+// util package is imported to use classes like Queue and LinkedList  
+import java.util.*;  
+   
+   
+// a public class named GeneralTree is created  
+public class GeneralTree{  
+   
+   
+// A inner class named Node is created representing a single node of a generic tree  
+static class Node  
+{  
+   
+// The class Node has two class variables named key and child of int type and Vector<Node> type respectively.  
+   
+int key;  
+Vector<Node >child = new Vector<>();  
+};  
+   
+   
+// An Utility function named newNode is created to add a new child node to an already existing tree node  
+public static Node newNode(int key)  
+{  
+   
+// a temporary node is created and then it is attached as a child to the existing parent node  
+Node temp = new Node();  
+temp.key = key;  
+return temp;  
+}  
+   
+// a public static function named LevelOrderTraversal is created to print all the nodes in the tree level-wise starting from the root node which passed a parameter to the LevelOrderTraversal fucntion  
+   
+public static void LevelOrderTraversal(Node root)  
+{  
+if (root == null)  
+return;  
+   
+// Standard level order traversal code  
+// Queue is used to traverse the tree level-wise starting from the root node  
+Queue<Node > q = new LinkedList<>(); // Create a queue  
+q.add(root); // Enqueue root  
+while (!q.isEmpty()){  
+   
+int n = q.size();  
+   
+// If this node has children  
+while (n > 0)  
+{  
+// Dequeue an item from queue  
+// and print it  
+Node p = q.peek();  
+q.remove();  
+System.out.print(p.key + " ");  
+   
+// Enqueue all children of  
+// the dequeued item  
+for (int i = 0; i < p.child.size(); i++)  
+q.add(p.child.get(i));  
+n--;  
+}  
+// One level is completed  
+// Now nodes in the next level is printed in the next line and same task is repeated each time the nodes in a level are exhausted  
+System.out.println();  
+}  
+}  
+   
+// main function is created to call all the above created functions and create a general tree  
+public static void main(String[] args){  
+/* Now we will be creating this general tree using the Node class objects 
+*                      10 
+*     /   /     \      \ 
+*   2   34   56    100 
+*   / \   |     /  |  \ 
+*           77  88        1   7  8  9 
+*/  
+   
+   
+// creating a root node with value 10  
+Node root_node = newNode(10);  
+   
+// adding four childs to the root node having values 2, 34, 56, adn 100 respectively  
+(root_node.child).add(newNode(2));  
+(root_node.child).add(newNode(34));  
+(root_node.child).add(newNode(56));  
+(root_node.child).add(newNode(100));  
+   
+// adding two child nodes to the first child node of the root node having values 77, and 88 respectively  
+(root_node.child.get(0).child).add(newNode(77));  
+(root_node.child.get(0).child).add(newNode(88));  
+   
+   
+// adding one child nodes to the third child node of the root node having values 1  
+(root_node.child.get(2).child).add(newNode(1));  
+   
+// adding three child nodes to the fourth child node of the root node having values 7, 8, and 9 respectively  
+(root_node.child.get(3).child).add(newNode(7));  
+(root_node.child.get(3).child).add(newNode(8));  
+(root_node.child.get(3).child).add(newNode(9));  
+   
+System.out.println("Printing the nodes of tree level wise :");  
+System.out.println("Level order traversal : ");  
+   
+LevelOrderTraversal(root_node);  
+}  
+   
+}  
+//end of the public GeneralTree Class  
+Output:
+
+Printing the nodes of tree level wise :
+Level order traversal :
+(level 0) 10
+(level 1) 2 34 56 100
+(level 2) 77 88 1 7 8 9
+In the code written above, we have created a class named GenralTree that has one static inner class named Node that will depict the actual node of a tree. And we have also a public static function named newNode that is used to add a new node to the tree and the value that the newly added node holding is passed as a parameter to this newNode function.
+
+In the main function first, we have created a root node as an object of the inner static class named Node having a value of 10. Then we added four nodes as the child nodes to the root having values 2, 34, 56, and 100. There newly added four children will be in level 1 and the root node will be in level 0. Now we added two child nodes to the first node in level 1 (i.e., node having value 2) having values 77 and 88 respectively. Further, we added one child node to the second node in level 1 (i.e., node having value 34) having value 1. And in the last, we added three child nodes to the last node in level 1 (i.e., node having value 100) having values 7, 8, and 9 respectively.
+
+Once the tree is created successfully, we have printed the tree level-wise, which means the nodes in one level are printed and then the nodes in the next level are printed until all the nodes in the tree are exhausted.
+
+And for printing the tree level-wise, we have created a function named LevelOrderTraversal that will print the tree level-wise. After the successful creation of the tree, we have called the LevelOrderTraversal passing the root of the node as a parameter to the LevelOrderTraversal function.
+
+Binary Tree:
+A binary tree can be defined as one of the trees in which only two children can be added to each parent node. The child nodes are known as the left child node and right child node. A binary tree is one of the most popular trees. When we apply various constraints and characteristics to a Binary tree, various numbers of other trees such as AVL tree, BST (Binary Search Tree), RBT tree, etc. are formed. We will explain in detail these types of trees in further discussion.
+
+In other words, we can say that a generic tree whose elements have at most two children is called a binary tree. Since each element in a binary tree can have only 2 children, we typically name them the left and right children.
+
+A Binary Tree node contains the following parts.
+
+Data
+Pointer to the left child
+Pointer to the right child
+Code:
+
+// Java program to create and level order traverse a binary tree  
+   
+   
+// util package is imported to use classes like Queue and LinkedList  
+import java.util.*;  
+   
+   
+   
+// A class named Node is created representing a single node of a binary tree  
+class Node{  
+   
+   
+  // The class Node has three class variables named key and left and right of int type and Node type respectively.  
+   
+   
+  // the key variable holds the actual value that is assigned to that node of the binary tree  
+  int key;  
+   
+  // left and right variables that are of Node type will be used to store the left and right child nodes of the parent of the binary tree  
+  Node left, right;  
+   
+// a parameterized constructor is created to create and add data to the node at the same time.  
+  public Node(int item)  
+  {  
+    key = item;  
+    left = right = null;  
+  }  
+   
+ }  
+// end of node class definition  
+   
+// A public class named BinaryTree is created having two constructors and methods to print the binary tree level-wise.  
+   
+class BinaryTree{  
+   
+  // A static variable named root_node is created that will represent the node of the binary tree  
+  static Node root_node;  
+   
+   
+   
+   
+  // A parametrized constructor of the BinaryTree class is written having the key as a parameter  
+  BinaryTree(int key)  
+  {  
+   
+// here we are constructing a new node and assigning it to the root node  
+    root_node = new Node(key);  
+  }  
+   
+  BinaryTree()  
+  {  
+    root_node = null;  
+  }  
+   
+   
+   
+// a public static function named printLevelOrder is created to print all the nodes in the tree level-wise starting from the root node  
+   
+ public static void printLevelOrder()  
+    {  
+        int h = height(root_node);  
+        int i;  
+        for (i=1; i<=h; i++){  
+            printCurrentLevel(root_node, i);  
+            System.out.println();  
+          }  
+    }  
+   
+// a public static function named height is created to fund the height of the binary tree starting from the root node to the farthest leaf node that is present in the binary tree  
+   
+// the root node of the binary tree is passed as a parameter to the public static function named height  
+   
+    public static int height(Node root){  
+   
+        if (root == null)  
+           return 0;  
+        else  
+        {  
+            /* compute  height of each subtree */  
+            int lheight = height(root.left);  
+            int rheight = height(root.right);  
+               
+            /* use the larger one */  
+            if (lheight > rheight)  
+                return(lheight+1);  
+            else return(rheight+1);  
+        }  
+    }  
+   
+   
+// a Public static function named printCurrrntLevel is created to print al the nodes that are present in that level  
+   
+// this function is called repeatedly for the each level of the binary tree  
+   
+   public static void printCurrentLevel (Node root ,int level)  
+    {  
+        if (root == null)  
+            return;  
+        if (level == 1)  
+            System.out.print(root.key + " ");  
+        else if (level > 1)  
+        {  
+            printCurrentLevel(root.left, level-1);  
+            printCurrentLevel(root.right, level-1);  
+        }  
+    }  
+   
